@@ -8,6 +8,7 @@ Support vector machine (SVM) was developed by Vapnik, and it has been used in ma
 Its main objective is to find the optimal hyperplane that separates two classes in a given data _D_. The classification of data is accomplished using the decision function _f(x)_:
 
 ![](figure/input.png)
+
 ![](figure/decision_function.png)
 
 where `{-1,+1}` are the classes of given data. The learning parameters (weights `w`, and biases `b`) are obtained as the solution of the following optimization problem:
@@ -15,7 +16,9 @@ where `{-1,+1}` are the classes of given data. The learning parameters (weights 
 ![](figure/constrained-svm.png)
 
 ![](figure/euclidean-norm.png)
+
 ![](figure/constraint-1.png)
+
 ![](figure/constraint-2.png)
 
 where `||w||_{2}` is the Euclidean norm (also known as the L2-norm), `\xi` is the cost function, and `C` is the penalty parameter (which may be an arbitrary value or a value obtained through hyper-parameter tuning). The corresponding unconstrained optimization problem is the following:
