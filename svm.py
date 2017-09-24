@@ -152,8 +152,16 @@ class SVM:
                 predicted_labels = sess.run(tf.maximum(predicted_labels[:, 0], predicted_labels[:, 1]))
 
                 conf = confusion_matrix(validation_data[1][:BATCH_SIZE], predicted_labels)
-                print('Confusion matrix : {}'.format(conf))
-                plt.imshow(conf, cmap='binary', interpolation='None').show()
+
+                # display the findings from the confusion matrix
+                print('True negative : {}'.format(conf[0][0]))
+                print('False negative : {}'.format(conf[1][0]))
+                print('True positive : {}'.format(conf[1][1]))
+                print('False positive : {}'.format(conf[0][1]))
+
+                # plot the confusion matrix
+                plt.imshow(conf, cmap='binary', interpolation='None')
+                plt.show()
 
     @staticmethod
     def variable_summaries(var):
