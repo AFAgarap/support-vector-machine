@@ -1,6 +1,9 @@
 support-vector-machine
 ==
 
+[![Hex.pm](https://img.shields.io/hexpm/l/plug.svg)]()
+[![PyPI](https://img.shields.io/pypi/pyversions/Django.svg)]()
+
 Support vector machine (SVM) was developed by Vapnik, and it has been used in many real-world applications, especially in cases of binary classification.
 Its main objective is to find the optimal hyperplane that separates two classes in a given data _D_. The classification of data is accomplished using the decision function _f(x)_:
 
@@ -54,6 +57,16 @@ Each feature had its (1) mean, (2) standard error, and (3) "worst" or largest (m
 |x (feature)|569|(569, 30)|
 |y (label)|569|(569)|
 
+## Pre-requisite
+
+It is recommended that you have Python 3.x (specifically 3.5 or 3.6) installed in your system. Install the Python libraries specified in the following command to run the program.
+
+```buildoutcfg
+$ sudo pip3 install matplotlib sklearn tensorflow
+```
+
+You may opt to use `tensorflow-gpu` instead of `tensorflow`, it's entirely your choice.
+
 ## Usage
 
 First, clone the project.
@@ -86,7 +99,13 @@ Then, go to its directory by using `cd`, and run the main program according to y
 ~/support-vector-machine$ python3 main.py --svm_c 1 --num_epochs 1000 --log_path ./logs
 ```
 
-## Sample Output
+## Sample Result
+
+Training accuracy (graph above), and training loss (graph below).
+
+![](figure/loss_and_accuracy.png)
+
+Truncated training loss and training accuracy, with counts of true negative, false negative, true positive, and false positive.
 
 ```
 step[0] train -- loss : 1310.61669921875, accuracy : 0.32500001788139343
@@ -102,6 +121,8 @@ False negative : 2
 True positive : 26
 False positive : 0
 ```
+
+Confusion matrix on test data.
 
 ![](figure/confusion_matrix.png)
 
