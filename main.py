@@ -30,6 +30,10 @@ def parse_args():
     parser = argparse.ArgumentParser(
         description='SVM built using TensorFlow, for Wisconsin Breast Cancer Diagnostic Dataset')
     group = parser.add_argument_group('Arguments')
+    group.add_argument('-c', '--svm_c', required=True, type=int,
+                       help='Penalty parameter C of the SVM')
+    group.add_argument('-n', '--num_epochs', required=True, type=int,
+                       help='number of epochs')
     group.add_argument('-l', '--log_path', required=True, type=str,
                        help='path where to save the TensorBoard logs')
     arguments = parser.parse_args()
@@ -38,17 +42,32 @@ def parse_args():
 
 def main(arguments):
 
+    # load the features of the dataset
     features = datasets.load_breast_cancer().data
+
+    # get the number of features
+    num_features = features.shape[1]
+
+    # load the corresponding labels for the features
     labels = datasets.load_breast_cancer().target
 
+    # transform the labels to {-1, +1}
+    labels[labels == 0] = -1
+
+    # trim the data size to 550
+    features = features[:550]
+    labels = labels[:550]
+
+    # split the dataset to 70/30 partition: 70% train, 30% test
     train_features, test_features, train_labels, test_labels = train_test_split(features, labels,
-                                                                                test_size=0.30, stratify=labels)
+                                                                                test_size=0.20, stratify=labels)
 
-    model = svm.Svm(train_data=[train_features, train_labels], validation_data=[test_features, test_labels],
-                    log_path=arguments.log_path)
+    # instantiate the SVM class
+    model = svm.SVM(svm_c=arguments.svm_c, num_epochs=arguments.num_epochs, log_path=arguments.log_path,
+                    num_features=num_features)
 
-    # model.train()
-
+    model.train(train_data=[train_features, train_labels], train_size=train_features.shape[0],
+                validation_data=[test_features, test_labels])
 
 
 if __name__ == '__main__':
