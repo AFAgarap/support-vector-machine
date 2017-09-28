@@ -129,6 +129,33 @@ Confusion matrix on test data.
 
 ![](figure/confusion_matrix.png)
 
+
+#### Standardized Dataset
+The results above are based on a raw dataset from `sklearn`, i.e. `sklearn.datasets.load_breast_cancer().data`. Now, the following is a sample output based on a standardized dataset (using `sklearn.preprocessing.StandardScaler`):
+
+![](figure/loss_and_accuracy_based_on_standardized_data.png)
+
+Truncated training loss and training accuracy, with counts of true negative, false negative, true positive, and false positive.
+
+```buildoutcfg
+step[0] train -- loss : 86.02317810058594, accuracy : 0.44999998807907104
+step[100] train -- loss : 49.41931915283203, accuracy : 0.6250000596046448
+step[200] train -- loss : 41.406898498535156, accuracy : 0.925000011920929
+...
+step[10800] train -- loss : 2.045114040374756, accuracy : 1.0
+step[10900] train -- loss : 6.896279335021973, accuracy : 0.9749999642372131
+EOF -- training done at step 10999
+Validation accuracy : 0.9750000238418579
+True negative : 16
+False negative : 0
+True positive : 23
+False positive : 1
+```
+
+Confusion matrix on the standardized test data.
+
+![](figure/confusion_matrix_based_on_standardized_data.png)
+
 ## License
 
 ```buildoutcfg
