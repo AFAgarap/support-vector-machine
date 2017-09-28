@@ -17,7 +17,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-__version__ = '0.1'
+__version__ = '0.1.1'
 __author__ = 'Abien Fred Agarap'
 
 import matplotlib.pyplot as plt
@@ -27,7 +27,7 @@ import tensorflow as tf
 import time
 
 BATCH_SIZE = 40
-LEARNING_RATE = 1e-5
+LEARNING_RATE = 1e-3
 NUM_CLASSES = 2
 
 
