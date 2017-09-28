@@ -149,7 +149,8 @@ class SVM:
                 predicted_labels = sess.run(self.predicted_class,
                                             feed_dict={self.x_input: validation_data[0][:BATCH_SIZE]})
 
-                predicted_labels = sess.run(tf.maximum(predicted_labels[:, 0], predicted_labels[:, 1]))
+                predicted_labels = sess.run(tf.argmax(predicted_labels, 1))
+                predicted_labels[predicted_labels == 0] = -1
 
                 conf = confusion_matrix(validation_data[1][:BATCH_SIZE], predicted_labels)
 
