@@ -17,11 +17,12 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-__version__ = '0.1'
+__version__ = '0.1.1'
 __author__ = 'Abien Fred Agarap'
 
 import argparse
 from sklearn import datasets
+from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 import svm
 
@@ -44,6 +45,9 @@ def main(arguments):
 
     # load the features of the dataset
     features = datasets.load_breast_cancer().data
+
+    # standardize the features
+    features = StandardScaler().fit_transform(features)
 
     # get the number of features
     num_features = features.shape[1]
