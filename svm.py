@@ -17,7 +17,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-__version__ = '0.1.1'
+__version__ = '0.1.2'
 __author__ = 'Abien Fred Agarap'
 
 import matplotlib.pyplot as plt
@@ -44,21 +44,22 @@ class SVM:
 
             with tf.name_scope('input'):
 
-                # [BATCH_SIZE, 30]
+                # [BATCH_SIZE, NUM_FEATURES]
                 x_input = tf.placeholder(dtype=tf.float32, shape=[None, self.num_features], name='x_input')
 
                 # [BATCH_SIZE]
                 y_input = tf.placeholder(dtype=tf.uint8, shape=[None], name='y_input')
 
                 # [BATCH_SIZE, NUM_CLASSES]
-                y_onehot = tf.one_hot(y_input, 2, on_value=1, off_value=-1, name='y_onehot')
+                y_onehot = tf.one_hot(indices=y_input, depth=NUM_CLASSES, on_value=1, off_value=-1, name='y_onehot')
 
             learning_rate = tf.placeholder(dtype=tf.float32, name='learning_rate')
 
             with tf.name_scope('training_ops'):
                 with tf.name_scope('weights'):
                     weight = tf.get_variable(name='weights',
-                                             initializer=tf.random_normal([self.num_features, NUM_CLASSES], stddev=0.01))
+                                             initializer=tf.random_normal([self.num_features, NUM_CLASSES],
+                                                                          stddev=0.01))
                     self.variable_summaries(weight)
                 with tf.name_scope('biases'):
                     bias = tf.get_variable(name='biases', initializer=tf.constant([0.1], shape=[NUM_CLASSES]))
