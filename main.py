@@ -17,7 +17,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-__version__ = '0.1.1'
+__version__ = '0.1.2'
 __author__ = 'Abien Fred Agarap'
 
 import argparse
@@ -25,6 +25,10 @@ from sklearn import datasets
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 import svm
+
+BATCH_SIZE = 40
+LEARNING_RATE = 1e-3
+NUM_CLASSES = 2
 
 
 def parse_args():
