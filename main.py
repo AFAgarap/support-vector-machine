@@ -17,7 +17,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-__version__ = '0.1.2'
+__version__ = '0.1.3'
 __author__ = 'Abien Fred Agarap'
 
 import argparse
@@ -71,11 +71,12 @@ def main(arguments):
                                                                                 test_size=0.20, stratify=labels)
 
     # instantiate the SVM class
-    model = svm.SVM(svm_c=arguments.svm_c, num_epochs=arguments.num_epochs, log_path=arguments.log_path,
+    model = svm.SVM(alpha=LEARNING_RATE, batch_size=BATCH_SIZE, svm_c=arguments.svm_c, num_classes=NUM_CLASSES,
                     num_features=num_features)
 
-    model.train(train_data=[train_features, train_labels], train_size=train_features.shape[0],
-                validation_data=[test_features, test_labels])
+    # train the instantiated model
+    model.train(epochs=arguments.num_epochs, log_path=arguments.log_path, train_data=[train_features, train_labels],
+                train_size=train_features.shape[0], validation_data=[test_features, test_labels])
 
 
 if __name__ == '__main__':
