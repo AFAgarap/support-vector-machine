@@ -26,10 +26,6 @@ import sys
 import tensorflow as tf
 import time
 
-BATCH_SIZE = 40
-LEARNING_RATE = 1e-3
-NUM_CLASSES = 2
-
 
 class SVM:
 
