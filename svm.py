@@ -29,10 +29,11 @@ import time
 
 class SVM:
 
-    def __init__(self, svm_c, num_epochs, log_path, num_features):
+    def __init__(self, alpha, batch_size, svm_c, num_classes, num_features):
+        self.alpha = alpha
+        self.batch_size = batch_size
         self.svm_c = svm_c
-        self.num_epochs = num_epochs
-        self.log_path = log_path
+        self.num_classes = num_classes
         self.num_features = num_features
 
         def __graph__():
@@ -47,18 +48,19 @@ class SVM:
                 y_input = tf.placeholder(dtype=tf.uint8, shape=[None], name='y_input')
 
                 # [BATCH_SIZE, NUM_CLASSES]
-                y_onehot = tf.one_hot(indices=y_input, depth=NUM_CLASSES, on_value=1, off_value=-1, name='y_onehot')
+                y_onehot = tf.one_hot(indices=y_input, depth=self.num_classes, on_value=1, off_value=-1,
+                                      name='y_onehot')
 
             learning_rate = tf.placeholder(dtype=tf.float32, name='learning_rate')
 
             with tf.name_scope('training_ops'):
                 with tf.name_scope('weights'):
                     weight = tf.get_variable(name='weights',
-                                             initializer=tf.random_normal([self.num_features, NUM_CLASSES],
+                                             initializer=tf.random_normal([self.num_features, self.num_classes],
                                                                           stddev=0.01))
                     self.variable_summaries(weight)
                 with tf.name_scope('biases'):
-                    bias = tf.get_variable(name='biases', initializer=tf.constant([0.1], shape=[NUM_CLASSES]))
+                    bias = tf.get_variable(name='biases', initializer=tf.constant([0.1], shape=[self.num_classes]))
                     self.variable_summaries(bias)
                 with tf.name_scope('Wx_plus_b'):
                     output = tf.matmul(x_input, weight) + bias
@@ -67,7 +69,7 @@ class SVM:
             with tf.name_scope('svm'):
                 regularization = 0.5 * tf.reduce_sum(tf.square(weight))
                 hinge_loss = tf.reduce_sum(
-                    tf.square(tf.maximum(tf.zeros([BATCH_SIZE, NUM_CLASSES]),
+                    tf.square(tf.maximum(tf.zeros([self.batch_size, self.num_classes]),
                                          1 - tf.cast(y_onehot, tf.float32) * output)))
                 with tf.name_scope('loss'):
                     loss = regularization + self.svm_c * hinge_loss
