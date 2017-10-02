@@ -17,7 +17,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-__version__ = '0.1.2'
+__version__ = '0.1.3'
 __author__ = 'Abien Fred Agarap'
 
 import matplotlib.pyplot as plt
@@ -103,7 +103,7 @@ class SVM:
         __graph__()
         sys.stdout.write('</log>\n')
 
-    def train(self, train_data, train_size, validation_data):
+    def train(self, epochs, log_path, train_data, train_size, validation_data):
         """Trains the model"""
 
         # initialize the variables
@@ -113,19 +113,19 @@ class SVM:
         timestamp = str(time.asctime())
 
         # event files to contain the TensorBoard log
-        train_writer = tf.summary.FileWriter(self.log_path + timestamp + '-training', graph=tf.get_default_graph())
+        train_writer = tf.summary.FileWriter(log_path + timestamp + '-training', graph=tf.get_default_graph())
 
         with tf.Session() as sess:
             sess.run(init_op)
 
             try:
-                for step in range(self.num_epochs * train_size // BATCH_SIZE):
-                    offset = (step * BATCH_SIZE) % train_size
-                    batch_train_data = train_data[0][offset:(offset + BATCH_SIZE)]
-                    batch_train_labels = train_data[1][offset:(offset + BATCH_SIZE)]
+                for step in range(epochs * train_size // self.batch_size):
+                    offset = (step * self.batch_size) % train_size
+                    batch_train_data = train_data[0][offset:(offset + self.batch_size)]
+                    batch_train_labels = train_data[1][offset:(offset + self.batch_size)]
 
                     feed_dict = {self.x_input: batch_train_data, self.y_input: batch_train_labels,
-                                 self.learning_rate: LEARNING_RATE}
+                                 self.learning_rate: self.alpha}
 
                     summary, _, step_loss = sess.run([self.merged, self.optimizer, self.loss], feed_dict=feed_dict)
 
@@ -138,20 +138,20 @@ class SVM:
             finally:
                 print('EOF -- training done at step {}'.format(step))
 
-                feed_dict = {self.x_input: validation_data[0][:BATCH_SIZE],
-                             self.y_input: validation_data[1][:BATCH_SIZE]}
+                feed_dict = {self.x_input: validation_data[0][:self.batch_size],
+                             self.y_input: validation_data[1][:self.batch_size]}
 
                 validation_accuracy = sess.run(self.accuracy, feed_dict=feed_dict)
 
                 print('Validation accuracy : {}'.format(validation_accuracy))
 
                 predicted_labels = sess.run(self.predicted_class,
-                                            feed_dict={self.x_input: validation_data[0][:BATCH_SIZE]})
+                                            feed_dict={self.x_input: validation_data[0][:self.batch_size]})
 
                 predicted_labels = sess.run(tf.argmax(predicted_labels, 1))
                 predicted_labels[predicted_labels == 0] = -1
 
-                conf = confusion_matrix(validation_data[1][:BATCH_SIZE], predicted_labels)
+                conf = confusion_matrix(validation_data[1][:self.batch_size], predicted_labels)
 
                 # display the findings from the confusion matrix
                 print('True negative : {}'.format(conf[0][0]))
