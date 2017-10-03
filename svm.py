@@ -17,7 +17,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-__version__ = '0.1.3'
+__version__ = '0.1.4'
 __author__ = 'Abien Fred Agarap'
 
 import matplotlib.pyplot as plt
@@ -104,7 +104,21 @@ class SVM:
         sys.stdout.write('</log>\n')
 
     def train(self, epochs, log_path, train_data, train_size, validation_data):
-        """Trains the model"""
+        """Trains the SVM model
+
+        Parameter
+        ---------
+        epochs : int
+          The number of passes through the entire dataset.
+        log_path : str
+          The directory where to save the TensorBoard logs.
+        train_data : numpy.ndarray
+          The numpy.ndarray to be used as the training dataset.
+        train_size : int
+          The number of data in `train_data`.
+        validation_data : numpy.ndarray
+          The numpy.ndarray to be used as the validation dataset.
+        """
 
         # initialize the variables
         init_op = tf.group(tf.global_variables_initializer(), tf.local_variables_initializer())
