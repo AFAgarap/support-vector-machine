@@ -17,7 +17,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-__version__ = '0.1.3'
+__version__ = '0.1.4'
 __author__ = 'Abien Fred Agarap'
 
 import argparse
@@ -76,7 +76,8 @@ def main(arguments):
 
     # train the instantiated model
     model.train(epochs=arguments.num_epochs, log_path=arguments.log_path, train_data=[train_features, train_labels],
-                train_size=train_features.shape[0], validation_data=[test_features, test_labels])
+                train_size=train_features.shape[0], validation_data=[test_features, test_labels],
+                validation_size=test_features.shape[0])
 
 
 if __name__ == '__main__':
