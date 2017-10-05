@@ -17,7 +17,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-__version__ = '0.1.4'
+__version__ = '0.1.5'
 __author__ = 'Abien Fred Agarap'
 
 import matplotlib.pyplot as plt
@@ -103,7 +103,7 @@ class SVM:
         __graph__()
         sys.stdout.write('</log>\n')
 
-    def train(self, epochs, log_path, train_data, train_size, validation_data):
+    def train(self, epochs, log_path, train_data, train_size, validation_data, validation_size):
         """Trains the SVM model
 
         Parameter
@@ -118,6 +118,8 @@ class SVM:
           The number of data in `train_data`.
         validation_data : numpy.ndarray
           The numpy.ndarray to be used as the validation dataset.
+        validation_size : int
+          The number of data in `validation_data`.
         """
 
         # initialize the variables
@@ -152,30 +154,32 @@ class SVM:
             finally:
                 print('EOF -- training done at step {}'.format(step))
 
-                feed_dict = {self.x_input: validation_data[0][:self.batch_size],
-                             self.y_input: validation_data[1][:self.batch_size]}
+                for step in range(epochs * validation_size // self.batch_size):
 
-                validation_accuracy = sess.run(self.accuracy, feed_dict=feed_dict)
+                    feed_dict = {self.x_input: validation_data[0][:self.batch_size],
+                                 self.y_input: validation_data[1][:self.batch_size]}
 
-                print('Validation accuracy : {}'.format(validation_accuracy))
+                    validation_accuracy = sess.run(self.accuracy, feed_dict=feed_dict)
 
-                predicted_labels = sess.run(self.predicted_class,
-                                            feed_dict={self.x_input: validation_data[0][:self.batch_size]})
+                    print('Validation accuracy : {}'.format(validation_accuracy))
 
-                predicted_labels = sess.run(tf.argmax(predicted_labels, 1))
-                predicted_labels[predicted_labels == 0] = -1
+                    predicted_labels = sess.run(self.predicted_class,
+                                                feed_dict={self.x_input: validation_data[0][:self.batch_size]})
 
-                conf = confusion_matrix(validation_data[1][:self.batch_size], predicted_labels)
+                    predicted_labels = sess.run(tf.argmax(predicted_labels, 1))
+                    predicted_labels[predicted_labels == 0] = -1
 
-                # display the findings from the confusion matrix
-                print('True negative : {}'.format(conf[0][0]))
-                print('False negative : {}'.format(conf[1][0]))
-                print('True positive : {}'.format(conf[1][1]))
-                print('False positive : {}'.format(conf[0][1]))
+                    conf = confusion_matrix(validation_data[1][:self.batch_size], predicted_labels)
 
-                # plot the confusion matrix
-                plt.imshow(conf, cmap='binary', interpolation='None')
-                plt.show()
+                    # display the findings from the confusion matrix
+                    print('True negative : {}'.format(conf[0][0]))
+                    print('False negative : {}'.format(conf[1][0]))
+                    print('True positive : {}'.format(conf[1][1]))
+                    print('False positive : {}'.format(conf[0][1]))
+
+                    # plot the confusion matrix
+                    plt.imshow(conf, cmap='binary', interpolation='None')
+                    plt.show()
 
     @staticmethod
     def variable_summaries(var):
