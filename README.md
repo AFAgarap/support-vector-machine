@@ -104,6 +104,17 @@ Then, go to its directory by using `cd`, and run the main program according to y
 
 ## Sample Result
 
+The hyper-parameters used in the experiment were assigned by hand, and not through optimization/tuning.
+
+#### Hyper-parameters used for the SVM
+|Hyperparameters|SVM|
+|--------------|------|
+|BATCH_SIZE|4
+|EPOCHS|1000|
+|LEARNING RATE|1e-3|
+|SVM_C|1|
+
+
 Training accuracy (graph above), and training loss (graph below).
 
 ![](figure/loss_and_accuracy.png)
