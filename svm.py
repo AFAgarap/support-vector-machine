@@ -28,8 +28,24 @@ import time
 
 
 class SVM:
+    """Implementation of L2-Support Vector Machine using TensorFlow"""
 
     def __init__(self, alpha, batch_size, svm_c, num_classes, num_features):
+        """Initialize the SVM class
+
+        Parameter
+        ---------
+        alpha : float
+          The learning rate for the SVM model.
+        batch_size : int
+          Number of batches to use for training and testing.
+        svm_c : float
+          The SVM penalty parameter.
+        num_classes : int
+          Number of classes in a dataset.
+        num_features : int
+          Number of features in a dataset.
+        """
         self.alpha = alpha
         self.batch_size = batch_size
         self.svm_c = svm_c
