@@ -38,7 +38,14 @@ Features are computed from a digitized image of a fine needle aspirate (FNA) of 
 They describe the characteristics of the cell nuclei present in the image.
 ```
 
-Its class distribution: 357 benign, and 212 malignant (total of 569 instances). In this implementation, the classes were `{-1, +1}`, representing the benign class and malignant class respectively.
+The following is the class distribution of the dataset:
+
+|Class|Number of instances|
+|-----|-------------------|
+|benign|357|
+|malignant|212|
+
+A total of 569 instances. In this implementation, the classes were `{-1, +1}`, representing the benign class and malignant class respectively.
 
 The features included in the dataset are the following:
 
