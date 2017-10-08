@@ -72,7 +72,7 @@ Each feature had its (1) mean, (2) standard error, and (3) "worst" or largest (m
 It is recommended that you have Python 3.x (specifically 3.5 or 3.6) installed in your system. Install the Python libraries specified in the following command to run the program.
 
 ```buildoutcfg
-$ sudo pip3 install matplotlib sklearn tensorflow
+$ sudo pip3 install matplotlib numpy sklearn tensorflow
 ```
 
 You may opt to use `tensorflow-gpu` instead of `tensorflow`, it's entirely your choice.
