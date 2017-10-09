@@ -222,4 +222,4 @@ class SVM:
         labels = np.concatenate((predictions, actual), axis=1)
 
         # save the labels array to NPY file
-        np.save(file=os.path.join(result_path, '{}-gru_svm-{}.npy'.format(phase, step)), arr=labels)
+        np.save(file=os.path.join(result_path, '{}-svm-{}.npy'.format(phase, step)), arr=labels)
