@@ -175,27 +175,13 @@ class SVM:
                     feed_dict = {self.x_input: validation_data[0][:self.batch_size],
                                  self.y_input: validation_data[1][:self.batch_size]}
 
-                    validation_accuracy = sess.run(self.accuracy, feed_dict=feed_dict)
+                    validation_summary, predictions, actual, validation_loss, validation_accuracy = \
+                        sess.run([self.merged, self.predicted_class, self.y_onehot, self.loss, self.accuracy],
+                                 feed_dict=feed_dict)
 
-                    print('Validation accuracy : {}'.format(validation_accuracy))
-
-                    predicted_labels = sess.run(self.predicted_class,
-                                                feed_dict={self.x_input: validation_data[0][:self.batch_size]})
-
-                    predicted_labels = sess.run(tf.argmax(predicted_labels, 1))
-                    predicted_labels[predicted_labels == 0] = -1
-
-                    conf = confusion_matrix(validation_data[1][:self.batch_size], predicted_labels)
-
-                    # display the findings from the confusion matrix
-                    print('True negative : {}'.format(conf[0][0]))
-                    print('False negative : {}'.format(conf[1][0]))
-                    print('True positive : {}'.format(conf[1][1]))
-                    print('False positive : {}'.format(conf[0][1]))
-
-                    # plot the confusion matrix
-                    plt.imshow(conf, cmap='binary', interpolation='None')
-                    plt.show()
+                    if step % 100 == 0 and step > 0:
+                        print('step [{}] validation -- loss : {}, accuracy : {}'.format(step, validation_loss,
+                                                                                        validation_accuracy))
 
     @staticmethod
     def variable_summaries(var):
