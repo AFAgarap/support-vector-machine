@@ -119,7 +119,7 @@ class SVM:
         __graph__()
         sys.stdout.write('</log>\n')
 
-    def train(self, epochs, log_path, train_data, train_size, validation_data, validation_size):
+    def train(self, epochs, log_path, train_data, train_size, validation_data, validation_size, result_path):
         """Trains the SVM model
 
         Parameter
@@ -136,6 +136,8 @@ class SVM:
           The numpy.ndarray to be used as the validation dataset.
         validation_size : int
           The number of data in `validation_data`.
+        result_path : str
+          The path where to save the NPY files consisting of the actual and predicted labels.
         """
 
         # initialize the variables
@@ -182,6 +184,9 @@ class SVM:
                     if step % 100 == 0 and step > 0:
                         print('step [{}] validation -- loss : {}, accuracy : {}'.format(step, validation_loss,
                                                                                         validation_accuracy))
+
+                    self.save_labels(predictions=predictions, actual=actual, result_path=result_path, step=step,
+                                     phase='testing')
 
     @staticmethod
     def variable_summaries(var):
