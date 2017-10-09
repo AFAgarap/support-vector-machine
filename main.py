@@ -25,6 +25,7 @@ from sklearn import datasets
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 import svm
+import utils
 
 BATCH_SIZE = 40
 LEARNING_RATE = 1e-3
@@ -80,6 +81,15 @@ def main(arguments):
     model.train(epochs=arguments.num_epochs, log_path=arguments.log_path, train_data=[train_features, train_labels],
                 train_size=train_features.shape[0], validation_data=[test_features, test_labels],
                 validation_size=test_features.shape[0], result_path=arguments.result_path)
+
+    test_conf, test_accuracy = utils.plot_confusion_matrix(phase='testing', path=arguments.result_path,
+                                                           class_names=['benign', 'malignant'])
+
+    print('True negatives : {}'.format(test_conf[0][0]))
+    print('False negatives : {}'.format(test_conf[1][0]))
+    print('True positives : {}'.format(test_conf[0][1]))
+    print('False positives : {}'.format(test_conf[1][1]))
+    print('Testing accuracy : {}'.format(test_accuracy))
 
 
 if __name__ == '__main__':
