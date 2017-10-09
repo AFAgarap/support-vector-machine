@@ -17,7 +17,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-__version__ = '0.1.4'
+__version__ = '0.1.5'
 __author__ = 'Abien Fred Agarap'
 
 import argparse
@@ -41,6 +41,8 @@ def parse_args():
                        help='number of epochs')
     group.add_argument('-l', '--log_path', required=True, type=str,
                        help='path where to save the TensorBoard logs')
+    group.add_argument('-r', '--result_path', required=True, type=str,
+                       help='path where to save the NumPy array consisting of the actual and predicted labels')
     arguments = parser.parse_args()
     return arguments
 
@@ -77,7 +79,7 @@ def main(arguments):
     # train the instantiated model
     model.train(epochs=arguments.num_epochs, log_path=arguments.log_path, train_data=[train_features, train_labels],
                 train_size=train_features.shape[0], validation_data=[test_features, test_labels],
-                validation_size=test_features.shape[0])
+                validation_size=test_features.shape[0], result_path=arguments.result_path)
 
 
 if __name__ == '__main__':
