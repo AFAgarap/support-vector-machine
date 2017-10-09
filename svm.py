@@ -20,8 +20,8 @@ from __future__ import print_function
 __version__ = '0.1.5'
 __author__ = 'Abien Fred Agarap'
 
-import matplotlib.pyplot as plt
-from sklearn.metrics import confusion_matrix
+import numpy as np
+import os
 import sys
 import tensorflow as tf
 import time
@@ -194,3 +194,27 @@ class SVM:
             tf.summary.scalar('max', tf.reduce_max(var))
             tf.summary.scalar('min', tf.reduce_min(var))
             tf.summary.histogram('histogram', var)
+
+    @staticmethod
+    def save_labels(predictions, actual, result_path, step, phase):
+        """Saves the actual and predicted labels to a NPY file
+
+        Parameter
+        ---------
+        predictions : numpy.ndarray
+          The NumPy array containing the predicted labels.
+        actual : numpy.ndarray
+          The NumPy array containing the actual labels.
+        result_path : str
+          The path where to save the concatenated actual and predicted labels.
+        step : int
+          The time step for the NumPy arrays.
+        phase : str
+          The phase for which the predictions is, i.e. training/validation/testing.
+        """
+
+        # Concatenate the predicted and actual labels
+        labels = np.concatenate((predictions, actual), axis=1)
+
+        # save the labels array to NPY file
+        np.save(file=os.path.join(result_path, '{}-gru_svm-{}.npy'.format(phase, step)), arr=labels)
