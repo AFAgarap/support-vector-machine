@@ -65,13 +65,18 @@ def main(arguments):
     # transform the labels to {-1, +1}
     labels[labels == 0] = -1
 
-    # trim the data size to 550
-    features = features[:550]
-    labels = labels[:550]
-
     # split the dataset to 70/30 partition: 70% train, 30% test
     train_features, test_features, train_labels, test_labels = train_test_split(features, labels,
                                                                                 test_size=0.20, stratify=labels)
+
+    train_size = train_features.shape[0]
+    test_size = test_features.shape[0]
+
+    # slice the dataset as per the batch size
+    train_features = train_features[:train_size - (train_size % BATCH_SIZE)]
+    train_labels = train_labels[:train_size - (train_size % BATCH_SIZE)]
+    test_features = test_features[:test_features - (test_size % BATCH_SIZE)]
+    test_labels = test_labels[:test_labels - (test_size % BATCH_SIZE)]
 
     # instantiate the SVM class
     model = svm.SVM(alpha=LEARNING_RATE, batch_size=BATCH_SIZE, svm_c=arguments.svm_c, num_classes=NUM_CLASSES,
