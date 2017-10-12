@@ -75,8 +75,8 @@ def main(arguments):
     # slice the dataset as per the batch size
     train_features = train_features[:train_size - (train_size % BATCH_SIZE)]
     train_labels = train_labels[:train_size - (train_size % BATCH_SIZE)]
-    test_features = test_features[:test_features - (test_size % BATCH_SIZE)]
-    test_labels = test_labels[:test_labels - (test_size % BATCH_SIZE)]
+    test_features = test_features[:test_size - (test_size % BATCH_SIZE)]
+    test_labels = test_labels[:test_size - (test_size % BATCH_SIZE)]
 
     # instantiate the SVM class
     model = svm.SVM(alpha=LEARNING_RATE, batch_size=BATCH_SIZE, svm_c=arguments.svm_c, num_classes=NUM_CLASSES,
