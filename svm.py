@@ -169,7 +169,7 @@ class SVM:
                         train_writer.add_summary(summary=summary, global_step=step)
             except KeyboardInterrupt:
                 print('Training interrupted at step {}'.format(step))
-                sys.exit()
+                os._exit(1)
             finally:
                 print('EOF -- training done at step {}'.format(step))
 
