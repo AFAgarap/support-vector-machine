@@ -169,6 +169,7 @@ class SVM:
                         train_writer.add_summary(summary=summary, global_step=step)
             except KeyboardInterrupt:
                 print('Training interrupted at step {}'.format(step))
+                sys.exit()
             finally:
                 print('EOF -- training done at step {}'.format(step))
 
@@ -187,6 +188,9 @@ class SVM:
 
                     self.save_labels(predictions=predictions, actual=actual, result_path=result_path, step=step,
                                      phase='testing')
+
+                print('EOF -- testing done at step {}'.format(step))
+
 
     @staticmethod
     def variable_summaries(var):
