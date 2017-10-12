@@ -191,7 +191,6 @@ class SVM:
 
                 print('EOF -- testing done at step {}'.format(step))
 
-
     @staticmethod
     def variable_summaries(var):
         with tf.name_scope('summaries'):
