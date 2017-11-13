@@ -3,6 +3,7 @@ support-vector-machine
 
 [![Hex.pm](https://img.shields.io/hexpm/l/plug.svg)]()
 [![PyPI](https://img.shields.io/pypi/pyversions/Django.svg)]()
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1045859.svg)](https://doi.org/10.5281/zenodo.1045859)
 
 Support vector machine (SVM) was developed by Vapnik, and it has been used in many real-world applications, especially in cases of binary classification.
 Its main objective is to find the optimal hyperplane that separates two classes in a given data _D_. The classification of data is accomplished using the decision function _f(x)_:
