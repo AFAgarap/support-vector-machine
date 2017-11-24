@@ -1,7 +1,7 @@
 support-vector-machine
 ==
 
-[![Hex.pm](https://img.shields.io/hexpm/l/plug.svg)]()
+![](https://img.shields.io/badge/license-Apache--2.0-blue.svg)
 [![PyPI](https://img.shields.io/pypi/pyversions/Django.svg)]()
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1045859.svg)](https://doi.org/10.5281/zenodo.1045859)
 
