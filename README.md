@@ -5,7 +5,7 @@ support-vector-machine
 [![PyPI](https://img.shields.io/pypi/pyversions/Django.svg)]()
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1045859.svg)](https://doi.org/10.5281/zenodo.1045859)
 
-*This is a part of a recently-concluded research: [On Breast Cancer Detection: An Application of Machine Learning Algorithms on the Wisconsin Diagnostic Dataset](http://arxiv.org/abs/1711.07831) (September 2017 - November 2017)*.
+*This is a part of a recently-concluded research: [On Breast Cancer Detection: An Application of Machine Learning Algorithms on the Wisconsin Diagnostic Dataset](http://arxiv.org/abs/1711.07831) (September 2017 - November 2017)* [[code](https://github.com/AFAgarap/wisconsin-breast-cancer)].
 
 Support vector machine (SVM) was developed by Vapnik, and it has been used in many real-world applications, especially in cases of binary classification.
 Its main objective is to find the optimal hyperplane that separates two classes in a given data _D_. The classification of data is accomplished using the decision function _f(x)_:
