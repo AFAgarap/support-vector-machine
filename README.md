@@ -177,6 +177,20 @@ Confusion matrix on the standardized test data.
 
 ![](figure/confusion_matrix_based_on_standardized_data.png)
 
+## Citation
+
+To cite the repository/software, kindly use the following BibTex entry:
+```
+@misc{abien_fred_agarap_2017_1045859,
+  author       = {Abien Fred Agarap},
+  title        = {AFAgarap/support-vector-machine v0.1.5-alpha},
+  month        = nov,
+  year         = 2017,
+  doi          = {10.5281/zenodo.1045859},
+  url          = {https://doi.org/10.5281/zenodo.1045859}
+}
+```
+
 ## License
 
 ```buildoutcfg
