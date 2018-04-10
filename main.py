@@ -25,6 +25,7 @@ from sklearn import datasets
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 import svm
+from svm import SVM
 import utils
 
 BATCH_SIZE = 128
