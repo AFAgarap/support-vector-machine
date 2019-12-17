@@ -1,4 +1,4 @@
-support-vector-machine
+Linear Support Vector Machine (SVM)
 ==
 
 ![](https://img.shields.io/badge/license-Apache--2.0-blue.svg)
@@ -10,27 +10,27 @@ support-vector-machine
 Support vector machine (SVM) was developed by Vapnik, and it has been used in many real-world applications, especially in cases of binary classification.
 Its main objective is to find the optimal hyperplane that separates two classes in a given data _D_. The classification of data is accomplished using the decision function _f(x)_:
 
-![](figure/input.png)
+![](assets/input.png)
 
-![](figure/decision_function.png)
+![](assets/decision_function.png)
 
 where `{-1,+1}` are the classes of given data. The learning parameters (weights `w`, and biases `b`) are obtained as the solution of the following optimization problem:
 
-![](figure/constrained-svm.png)
+![](assets/constrained-svm.png)
 
-![](figure/euclidean-norm.png)
+![](assets/euclidean-norm.png)
 
-![](figure/constraint-1.png)
+![](assets/constraint-1.png)
 
-![](figure/constraint-2.png)
+![](assets/constraint-2.png)
 
 where `||w||_{2}` is the Euclidean norm (also known as the L2-norm), `\xi` is the cost function, and `C` is the penalty parameter (which may be an arbitrary value or a value obtained through hyper-parameter tuning). The corresponding unconstrained optimization problem is the following:
 
-![](figure/l1-svm.png)
+![](assets/l1-svm.png)
 
 where `wx + b` is the function that returns the vector containing the scores for each classes (i.e. the predicted classes). The objective of the equation above is known as the primal form of L1-SVM, with the standard hinge loss. In this project, the L2-SVM variant of SVM was used as it is differentiable, and it provides a more stable result than the L1-SVM.
 
-![](figure/l2-svm.png)
+![](assets/l2-svm.png)
 
 For this implementation, the SVM was written using Python and TensorFlow (as the machine intelligence library), and the problem tackled is a binary classification of breast cancer using the [Wisconsin diagnostic dataset](https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+(Diagnostic)).
 
@@ -127,7 +127,7 @@ The hyper-parameters used in the experiment were assigned by hand, and not throu
 
 Training accuracy (graph above), and training loss (graph below).
 
-![](figure/loss_and_accuracy.png)
+![](assets/loss_and_accuracy.png)
 
 Truncated training loss and training accuracy, with counts of true negative, false negative, true positive, and false positive.
 
@@ -148,13 +148,13 @@ False positive : 0
 
 Confusion matrix on test data.
 
-![](figure/confusion_matrix.png)
+![](assets/confusion_matrix.png)
 
 
 #### Standardized Dataset
 The results above are based on a raw dataset from `sklearn`, i.e. `sklearn.datasets.load_breast_cancer().data`. Now, the following is a sample output based on a standardized dataset (using `sklearn.preprocessing.StandardScaler`):
 
-![](figure/loss_and_accuracy_based_on_standardized_data.png)
+![](assets/loss_and_accuracy_based_on_standardized_data.png)
 
 Truncated training loss and training accuracy, with counts of true negative, false negative, true positive, and false positive.
 
@@ -175,7 +175,7 @@ False positive : 1
 
 Confusion matrix on the standardized test data.
 
-![](figure/confusion_matrix_based_on_standardized_data.png)
+![](assets/confusion_matrix_based_on_standardized_data.png)
 
 ## Citation
 
